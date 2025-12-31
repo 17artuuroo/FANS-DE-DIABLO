@@ -16,23 +16,34 @@
     </form>
     <p id="msg"></p>
   </div>
-  <script>
-    const form = document.querySelector("form");
-    const msg = document.getElementById("msg");
+ <script>
+const form = document.querySelector("form");
+const msg = document.getElementById("msg");
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const formData = new FormData(form);
+form.addEventListener("submit", function(e) {
+  e.preventDefault(); // Evita recargar la página
+  const formData = new FormData(form);
 
-      fetch("registro.php", {
-        method: "POST",
-        body: new URLSearchParams(formData)
-      })
-      .then(response => response.text())
-      .then(data => {
-        msg.textContent = data;
-      });
-    });
-  </script>
+  fetch("registro.php", {
+    method: "POST",
+    body: new URLSearchParams(formData)
+  })
+  .then(response => response.text())
+  .then(data => {
+    msg.textContent = data;
+
+    // Si el registro fue exitoso, limpiar formulario
+    if (data.includes("Registro exitoso")) {
+      form.reset();
+    }
+  })
+  .catch(err => {
+    msg.textContent = "Error en la conexión";
+    console.error(err);
+  });
+});
+</script>
+
 </body>
+
 </html>
