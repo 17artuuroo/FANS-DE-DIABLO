@@ -1,5 +1,5 @@
 body {
-  background: radial-gradient(circle, red, black);
+  background: radial-gradient(circle, rgb(148, 5, 5), black);
   text-align: center;
 }
 
@@ -116,3 +116,4 @@ body {
   background: red;
   box-shadow: 0 0 15px red;
 }
+
